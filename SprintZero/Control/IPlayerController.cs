@@ -5,5 +5,6 @@ namespace SprintZero.Control
     internal interface IPlayerController
     {
         Vector2 Move();
+        bool Attack();
     }
 }

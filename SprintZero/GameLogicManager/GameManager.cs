@@ -1,5 +1,6 @@
 ﻿using SprintZero.Control;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace SprintZero.GameLogicManager
 {
@@ -20,14 +21,20 @@ namespace SprintZero.GameLogicManager
             {
                 IsQuitting = true;
             }
-            else if (_gameController.IsPauseGame())
+            else if (_gameController.IsPausePressed())
             {
-                IsPaused = true;
+                if(IsPaused)
+                {
+                    IsPaused = false;
+                    Debug.WriteLine("Unpaused");
+                }
+                else
+                {
+                    IsPaused=true;
+                    Debug.WriteLine("Paused");
+                }
             }
-            else if (_gameController.IsResumeGame())
-            {
-                IsPaused = false;
-            }
+          
         }
 
        

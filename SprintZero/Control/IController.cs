@@ -1,7 +1,7 @@
-﻿namespace SprintZero.Control
-{
-    internal interface IController:IGameController, IPlayerController
+﻿    namespace SprintZero.Control
     {
-        void Update();
+        internal interface IController:IGameController, IPlayerController
+        {
+            void Update();
+        }
     }
-}

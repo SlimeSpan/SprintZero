@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SprintZero.GameLogicManager;
 using SprintZero.Control;
+using System.Diagnostics;
 namespace SprintZero
 {
     public class Game1 : Game
@@ -19,6 +20,9 @@ namespace SprintZero
         private Vector2 _fontPosition;
         private GameManager _gameManager;
         private IController _gameController;
+        private IEntitySystem player;
+
+        private Texture2D playerTexture;
 
         public Game1()
         {
@@ -26,7 +30,7 @@ namespace SprintZero
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-             
+          
             
         }
 
@@ -45,6 +49,8 @@ namespace SprintZero
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            playerTexture = Content.Load<Texture2D>("Player/ZeldaSpriteLinkFront");
+
             _font = Content.Load<SpriteFont>("Font/04B_30");
             
             //float fontYOrigin = _font.MeasureString(_credits).Y * 0.5f;
@@ -59,8 +65,14 @@ namespace SprintZero
             _gameController.Update();
             _gameManager.HandleInput();
             if (_gameManager.IsQuitting)
+            {
                 Exit();
-
+            }
+            else if (_gameManager.IsPaused)
+            {
+                
+            }
+            //Debug.WriteLine("Game Running");
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -71,7 +83,8 @@ namespace SprintZero
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-           
+
+            _spriteBatch.Draw(playerTexture, new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2), Color.White);
           
             _spriteBatch.DrawString(
                 _font,              // spriteFont

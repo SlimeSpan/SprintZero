@@ -7,8 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace SprintZero.GameLogicManager
 {
-    internal interface IGameSystem
+    internal interface IEntitySystem
     {
+        public void DrawByAction(string Action);
         public void Update(GameTime gameTime);
         public void Draw(GameTime gameTime);
     }

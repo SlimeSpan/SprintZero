@@ -10,18 +10,19 @@ namespace SprintZero.Control
 {
     internal class KeyboardController : IController
     {
-        private KeyboardState _keyState;
+        private KeyboardState previousKeyState;
+        private KeyboardState currentKeyState;
       
 
-        /// <summary>
-        /// Key bindings for movement and quitting the game, readonly for now.
-        /// </summary>
+      
         private readonly Keys _keyUp = Keys.W;
         private readonly Keys _keyDown = Keys.S;
         private readonly Keys _keyLeft = Keys.A;
         private readonly Keys _keyRight = Keys.D;
+
         private readonly Keys _keyQuit = Keys.Escape;
         private readonly Keys _keyPause = Keys.P;
+        private readonly Keys keyAttack = Keys.K;
 
         /// <summary>
         /// return a Vector2 representing the direction of movement based on the keys pressed
@@ -31,22 +32,22 @@ namespace SprintZero.Control
         {
             Vector2 direction = Vector2.Zero;
 
-            if (_keyState.IsKeyDown(_keyUp))
+            if (currentKeyState.IsKeyDown(_keyUp))
             {
                 direction.Y -= 1;
             }
 
-            if (_keyState.IsKeyDown(_keyDown))
+            if (currentKeyState.IsKeyDown(_keyDown))
             {
                 direction.Y += 1;
             }
 
-            if (_keyState.IsKeyDown(_keyLeft))
+            if (currentKeyState.IsKeyDown(_keyLeft))
             {
                 direction.X -= 1;
             }
 
-            if (_keyState.IsKeyDown(_keyRight))
+            if (currentKeyState.IsKeyDown(_keyRight))
             {
                 direction.X += 1;
             }
@@ -56,34 +57,32 @@ namespace SprintZero.Control
 
         public bool IsQuitGame()
         {
-            if (_keyState.IsKeyDown(_keyQuit))
-            {
-                return true;
-            }
-            return false;
+            
+                return currentKeyState.IsKeyDown(_keyQuit);
+            
         }
         //following methods are pause and resume game methods,they are same
         //but the logic is different, IsPauseGame() will return true when the game is paused, IsResumeGame() will return true when the game is resumed
-        public bool IsPauseGame()
-        {
-            if (_keyState.IsKeyDown(_keyPause))
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool IsResumeGame()
-        {
-            if (_keyState.IsKeyDown(_keyPause))
-            {
-                return true;
-            }
-            return false;
-        }
+        
+       
+      
 
         public void Update()
         {
-            _keyState =   Keyboard.GetState();
+            previousKeyState = currentKeyState;
+            currentKeyState =   Keyboard.GetState();
+        }
+
+        public bool IsPausePressed()
+        {
+
+            return currentKeyState.IsKeyDown(_keyPause)&&!previousKeyState.IsKeyDown(_keyPause);
+            
+        }
+
+        public bool Attack()
+        {
+            return currentKeyState.IsKeyDown(keyAttack);
         }
     }
 }

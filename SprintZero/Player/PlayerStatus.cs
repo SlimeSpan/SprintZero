@@ -1,10 +1,18 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
+using Microsoft.Xna.Framework;
 using SprintZero.Sprite;
 namespace SprintZero.Player
 {
-    internal class Player : IPlayer
+    internal class PlayerStatus : IPlayer
     {
-      
+
+
+        public float Speed
+        {
+            get;
+            set;
+        } = 1f;
         public Vector2 Position
         {
             get;
@@ -16,17 +24,17 @@ namespace SprintZero.Player
         /// </summary>
         /// <param name="sprite">The sprite representing the player.</param>
         /// <param name="initPosition">The initial position of the player.</param>
-        public Player( Vector2 initPosition)
+        public PlayerStatus(Vector2 initialPosition, float speed)
         {
-            Position = initPosition;
+            Position = initialPosition;
+            this.Speed = speed;
         }
 
-        public void Move(Vector2 dir)
+        public void Move(Vector2 dir,GameTime deltaTime)
         {
             Position += dir;
-
         }
 
-     
+        
     }
 }
