@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace SprintZero.Control
+namespace MonoGameLibrary
 {
-    internal interface IPlayerController
+    public interface IPlayerController
     {
         Vector2 Move();
         bool Attack();

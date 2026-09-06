@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
-using SprintZero.Sprite;
-namespace SprintZero.Player
+
+
+namespace MonoGameLibrary
 {
-    internal class PlayerStatus : IPlayer
+    public class PlayerStatus : IPlayer
     {
 
 

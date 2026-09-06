@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SprintZero.Entity;
 using SprintZero.GameLogicManager;
-using SprintZero.Control;
-using System.Diagnostics;
+using MonoGameLibrary;
 namespace SprintZero
 {
     public class Game1 : Game
@@ -29,8 +29,8 @@ namespace SprintZero
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-          
+            
+            
             
         }
 

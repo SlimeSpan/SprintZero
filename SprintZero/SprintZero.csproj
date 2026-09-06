@@ -29,4 +29,7 @@
   <ItemGroup>
     <Folder Include="Content\Font\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoGameLibrary\MonoGameLibrary.csproj" />
+  </ItemGroup>
 </Project>

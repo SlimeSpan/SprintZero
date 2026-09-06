@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace SprintZero.Control
+namespace MonoGameLibrary
 {
-    internal class KeyboardController : IController
+    public class KeyboardController : IController
     {
         private KeyboardState previousKeyState;
         private KeyboardState currentKeyState;

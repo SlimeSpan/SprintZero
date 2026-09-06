@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using SprintZero.Control;
-using SprintZero.Player;
-using SprintZero.Sprite;
+using MonoGameLibrary;
 
 
-namespace SprintZero.GameLogicManager
+
+namespace SprintZero.Entity
 {
     
     internal class PlayerEntity : IEntitySystem
@@ -32,7 +31,7 @@ namespace SprintZero.GameLogicManager
         {
            
             this.player = player;
-            this.PlayerController = playerController;
+            PlayerController = playerController;
             this.sprite = sprite;
         }
 
@@ -51,7 +50,7 @@ namespace SprintZero.GameLogicManager
                 return;
             }
             Vector2 moveDirection = PlayerController.Move();
-            player.Move(moveDirection);
+            player.Move(moveDirection,gameTime);
 
             switch (moveDirection)
             {
@@ -77,7 +76,7 @@ namespace SprintZero.GameLogicManager
             {
                 return;
             }
-            sprite.Draw(player.Position, gameTime,null,Color.White);
+            
             
         }
 
