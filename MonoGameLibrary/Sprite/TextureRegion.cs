@@ -15,6 +15,11 @@ namespace MonoGameLibrary.Sprite
             get;
             set;
         }
+        public SpriteEffects Effect 
+        { 
+            get; 
+            set; 
+        }
         
         
         public TextureRegion(Texture2D texture,int x,int y,int width,int height)
