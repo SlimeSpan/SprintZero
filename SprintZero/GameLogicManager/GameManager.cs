@@ -1,18 +1,21 @@
 ﻿using MonoGameLibrary;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
+using MonoGameLibrary.Control;
 
 namespace SprintZero.GameLogicManager
 {
     internal class GameManager
     {
+       
+
         public bool IsPaused { get; private set; }
         public bool IsQuitting { get; private set; }
         public IGameController _gameController;
         public GameManager(IGameController gameController)
         {
             _gameController = gameController;
-            IsPaused = false;
+            IsPaused = false;   
             IsQuitting = false;
         }
         public void HandleInput()
@@ -23,16 +26,8 @@ namespace SprintZero.GameLogicManager
             }
             else if (_gameController.IsPausePressed())
             {
-                if(IsPaused)
-                {
-                    IsPaused = false;
-                    Debug.WriteLine("Unpaused");
-                }
-                else
-                {
-                    IsPaused=true;
-                    Debug.WriteLine("Paused");
-                }
+                IsPaused = !IsPaused;
+                Debug.WriteLine($"Paused:{IsPaused}");
             }
           
         }

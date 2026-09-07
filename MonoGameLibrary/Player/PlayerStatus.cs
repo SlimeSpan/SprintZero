@@ -1,13 +1,20 @@
 ﻿using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.Xna.Framework;
+using MonoGameLibrary.Enums;
+using MonoGameLibrary.Player;
 
 
-namespace MonoGameLibrary
+namespace MonoGameLibrary.player
 {
     public class PlayerStatus : IPlayer
     {
 
+        public Direction Direction
+        {
+            get;
+            private set;
+        } = Direction.Down;
 
         public float Speed
         {
@@ -19,7 +26,14 @@ namespace MonoGameLibrary
             get;
             set;
         }
-     
+
+        public PlayerState State
+        {
+            get;
+            private set;
+        }
+
+
         /// <summary>
         /// Constructor for the Player class.
         /// </summary>
@@ -33,9 +47,42 @@ namespace MonoGameLibrary
 
         public void Move(Vector2 dir,GameTime deltaTime)
         {
-            Position += dir;
-        }
+            Position += dir*Speed*(float)deltaTime.ElapsedGameTime.TotalSeconds;
 
+            if(dir == Vector2.Zero)
+            {
+                State = PlayerState.Idle;
+                return;
+            }
+               
+
+            if (dir.X > 0)
+            {
+                Direction = Direction.Right;
+            }
+            else if (dir.X < 0)
+            {
+                Direction = Direction.Left;
+            }
+            else if (dir.Y > 0)
+            {
+                Direction = Direction.Down;
+            }
+            else if (dir.Y < 0)
+            {
+                Direction = Direction.Up;
+               
+            }
+            State = PlayerState.Moving;
+        }
+        public void Attack(bool isAttacking)
+        {
+            if (isAttacking)
+            {
+                State = PlayerState.Attacking;
+            }
+          
+        }
         
     }
 }

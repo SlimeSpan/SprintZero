@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace MonoGameLibrary
+namespace MonoGameLibrary.Control
 {
     public interface IPlayerController
     {

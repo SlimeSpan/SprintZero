@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
 
-namespace MonoGameLibrary
+namespace MonoGameLibrary.Control
 {
     public interface IGameController
     {
