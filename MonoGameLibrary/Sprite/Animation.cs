@@ -24,11 +24,11 @@ namespace MonoGameLibrary.Sprite
        
         private string currentState;
 
-        public bool IsPaused
-        { 
-            get; 
-            set; 
-        }
+        //public bool IsPaused
+        //{ 
+        //    get; 
+        //    set; 
+        //}
 
         public bool HasPlayedOnce
         {
@@ -50,10 +50,10 @@ namespace MonoGameLibrary.Sprite
 
         public void Update(GameTime gameTime)
         {
-            if (IsPaused)
-            {
-                return;
-            }
+            //if (IsPaused)
+            //{
+            //    return;
+            //}
 
             totalElapsed += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (totalElapsed >= frameTime)
@@ -61,10 +61,8 @@ namespace MonoGameLibrary.Sprite
                 frameIndex++;
                 totalElapsed -= frameTime;
 
-                if(frameIndex>=currentTextureClip.Length)
-                {
-                    HasPlayedOnce = true;
-                }
+                HasPlayedOnce = frameIndex >= currentTextureClip.Length;
+                
             }
         }
         
@@ -72,13 +70,16 @@ namespace MonoGameLibrary.Sprite
         {
             frameIndex %= currentTextureClip.Length;
             
-            TextureData region = currentTextureClip.GetFrame(frameIndex);
+            TextureData region = currentTextureClip[frameIndex];
             Texture2D texture = region.Texture;
             Rectangle sourceRectangle = region.Rectangle;
             SpriteEffects effect = region.Effect;
             float Scale = region.Scale;
-
-            spriteRenderer.Draw(texture:texture,targetPos:targetPos,sourceRectangle:sourceRectangle,color: color,spriteEffect:effect, scale: Scale);
+            
+            //only allow use the center of sprite as origin for now.
+            Vector2 origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
+            
+            spriteRenderer.Draw(texture:texture,targetPos:targetPos,sourceRectangle:sourceRectangle,color: color,origin:origin,spriteEffect:effect, scale: Scale);
         }
      
         public string[] GetStates()
@@ -103,6 +104,7 @@ namespace MonoGameLibrary.Sprite
             {
                 return;
             }
+
             //start play new animation, reset frame
             frameIndex = 0;
             totalElapsed = 0f;

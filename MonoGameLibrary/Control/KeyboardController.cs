@@ -67,7 +67,7 @@ namespace MonoGameLibrary.Control
        
       
 
-        public void Update()
+        public virtual void Update()
         {
             previousKeyState = currentKeyState;
             currentKeyState =   Keyboard.GetState();
@@ -80,7 +80,7 @@ namespace MonoGameLibrary.Control
             
         }
 
-        public bool Attack()
+        public virtual bool Attack()
         {
             return currentKeyState.IsKeyDown(keyAttack);
         }

@@ -21,6 +21,14 @@
 /processorParam:Version=3.8.5.0
 /build:Font/04B_30.spritefont
 
+#begin Font/Arial.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/processorParam:Version=3.8.5.0
+/build:Font/Arial.spritefont
+
 #begin Player/Link.png
 /importer:TextureImporter
 /processor:TextureProcessor

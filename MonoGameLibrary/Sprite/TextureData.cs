@@ -20,6 +20,7 @@ namespace MonoGameLibrary.Sprite
             get;
             set;
         } 
+       
         public float Scale
         {
             get;

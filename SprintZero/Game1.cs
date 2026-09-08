@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Control;
 using MonoGameLibrary.player;
 using MonoGameLibrary.Sprite;
@@ -9,6 +10,7 @@ using MonoGameLibrary.Sprite;
 using SprintZero.Content.SpriteData;
 using SprintZero.Entity;
 using SprintZero.GameLogicManager;
+using SprintZero.LoadCharacter;
 namespace SprintZero
 {
     public class Game1 : Game
@@ -16,7 +18,7 @@ namespace SprintZero
         private static readonly string _credits =
         "CREDITS\r\n" +
         "Program Made By: Alex Chen\r\n" +
-        "Sprite From:";
+        "Sprite From:https://www.spriters-resource.com/nes/legendofzelda/";
 
 
         private GraphicsDeviceManager _graphics;
@@ -27,9 +29,10 @@ namespace SprintZero
         private Vector2 fontPosition;
         private GameManager gameManager;
         
-        private IEntitySystem player;
+        private IEntitySystem playerEntity;
         private IController gameController;
         private IAnimation playerAnimation;
+
 
         public Game1()
         {
@@ -45,7 +48,7 @@ namespace SprintZero
 
         protected override void Initialize()
         {
-            gameController = new KeyboardController();
+            gameController = new KeyboardMouseController();
             gameManager = new GameManager(gameController);
 
             
@@ -60,74 +63,39 @@ namespace SprintZero
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Texture2D playerTexture = Content.Load<Texture2D>("Player/Link");
-                
-            font = Content.Load<SpriteFont>("Font/04B_30");
-
-            LoadLinkAnimation( playerTexture);
-
+            
+            //Used for show credit, no special use
+            font = Content.Load<SpriteFont>("Font/Arial");
             float fontXOrigin = font.MeasureString(_credits).X * 0.5f;
-            fontPosition = new Vector2(GraphicsDevice.Viewport.Width/2-fontXOrigin, GraphicsDevice.Viewport.Height - font.MeasureString(_credits).Y);
+            fontPosition = new Vector2(GraphicsDevice.Viewport.Width / 2 - fontXOrigin, GraphicsDevice.Viewport.Height - font.MeasureString(_credits).Y);
+
+
+
+
+
+            playerAnimation = Link.LoadAnimation(playerTexture,new SpriteRenderer(_spriteBatch) , 3f, 0.1f);
             
-            player = new PlayerEntity(new PlayerStatus(new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2), 100f), gameController,playerAnimation);
+            IPlayer playerStatus = new PlayerStatus(new Vector2(fontPosition.X, fontPosition.Y - 50), 200f);
+            playerEntity = new PlayerEntity(playerStatus, gameController,playerAnimation);
         }
-        private void LoadLinkAnimation(Texture2D texture2D)
-        {
-            TextureClip MoveDown = new TextureClip();
-            TextureClip MoveRight = new TextureClip();
-            TextureClip MoveUp = new TextureClip();
-            TextureClip MoveLeft = new TextureClip();
-            for (int i = 0; i < LinkSpriteData.MoveDown.Length; i++)
-            {
-                MoveDown.AddFrame(new TextureData(texture2D, LinkSpriteData.MoveDown[i],scale:2));
-            }
-
-          
-            for (int i = 0; i < LinkSpriteData.MoveRight.Length; i++)
-            {
-                MoveRight.AddFrame(new TextureData(texture2D, LinkSpriteData.MoveRight[i],scale:2));
-            }
-
-            int moveLeftFrameCount = LinkSpriteData.MoveRight.Length;
-            
-            for (int i = 0; i < moveLeftFrameCount; i++)
-            {
-                MoveLeft.AddFrame(new TextureData(texture2D, LinkSpriteData.MoveRight[i], SpriteEffects.FlipHorizontally, scale:2));
-            }
-            
-            for (int i = 0; i < LinkSpriteData.MoveUp.Length; i++)
-            {
-                MoveUp.AddFrame(new TextureData(texture2D, LinkSpriteData.MoveUp[i],scale:2));
-            }
-           
-
-            Dictionary<string, TextureClip> animationClips = new Dictionary<string, TextureClip>
-            {
-               
-                { "MoveDown",MoveDown },
-                { "MoveRight",MoveRight },               
-                { "MoveUp",MoveUp },
-                { "MoveLeft",MoveLeft }
-                //{ "Attack", new TextureClip(texture2D, 0, 32, 16, 16, 3) }
-            };
-            playerAnimation = new Animation(animationClips, new SpriteRenderer(_spriteBatch), 0.2f);
-        }
-
+        
         protected override void Update(GameTime gameTime)
         {
             gameController.Update();
             gameManager.HandleInput();
            
+
             if (gameManager.IsQuitting)
             {
                 Exit();
             }
             else if (gameManager.IsPaused)
             {
-                   
+                //not implemented yet
             }
-            //Debug.WriteLine("Game Running");
-           
-            player.Update(gameTime);
+
+
+            playerEntity.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -139,15 +107,10 @@ namespace SprintZero
 
             _spriteBatch.Begin();
 
-            player.Draw(gameTime);
+            playerEntity.Draw(gameTime);
 
 
-            _spriteBatch.DrawString(
-                font,              // spriteFont
-                _credits, // text
-                fontPosition, // position
-                Color.White       // color
-            );
+            _spriteBatch.DrawString(font,_credits, fontPosition, Color.White);
 
             _spriteBatch.End();
             base.Draw(gameTime);

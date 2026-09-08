@@ -14,7 +14,7 @@ namespace MonoGameLibrary.player
         {
             get;
             private set;
-        } = Direction.Down;
+        } = Direction.Right; //default direction is right
 
         public float Speed
         {

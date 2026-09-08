@@ -10,11 +10,11 @@ namespace MonoGameLibrary.Sprite
 {
     public interface IAnimation
     {
-        public bool IsPaused
-        {
-            get;
-            set;
-        }
+        //public bool IsPaused
+        //{
+        //    get;
+        //    set;
+        //}
         bool HasPlayedOnce
         {
             get;
