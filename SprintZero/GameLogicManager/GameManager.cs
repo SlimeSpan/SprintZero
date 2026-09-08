@@ -11,20 +11,20 @@ namespace SprintZero.GameLogicManager
 
         public bool IsPaused { get; private set; }
         public bool IsQuitting { get; private set; }
-        public IGameController _gameController;
+        public IGameController gameController;
         public GameManager(IGameController gameController)
         {
-            _gameController = gameController;
+            this.gameController = gameController;
             IsPaused = false;   
             IsQuitting = false;
         }
         public void HandleInput()
         {
-            if (_gameController.IsQuitGame())
+            if (gameController.IsQuitGame())
             {
                 IsQuitting = true;
             }
-            else if (_gameController.IsPausePressed())
+            else if (gameController.IsPausePressed())
             {
                 IsPaused = !IsPaused;
                 Debug.WriteLine($"Paused:{IsPaused}");

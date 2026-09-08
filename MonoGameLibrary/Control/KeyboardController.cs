@@ -15,13 +15,13 @@ namespace MonoGameLibrary.Control
       
 
       
-        private readonly Keys _keyUp = Keys.W;
-        private readonly Keys _keyDown = Keys.S;
-        private readonly Keys _keyLeft = Keys.A;
-        private readonly Keys _keyRight = Keys.D;
+        private readonly Keys keyUp = Keys.W;
+        private readonly Keys keyDown = Keys.S;
+        private readonly Keys keyLeft = Keys.A;
+        private readonly Keys keyRight = Keys.D;
 
-        private readonly Keys _keyQuit = Keys.Escape;
-        private readonly Keys _keyPause = Keys.P;
+        private readonly Keys keyQuit = Keys.Escape;
+        private readonly Keys keyPause = Keys.P;
         private readonly Keys keyAttack = Keys.K;
 
         /// <summary>
@@ -32,22 +32,22 @@ namespace MonoGameLibrary.Control
         {
             Vector2 direction = Vector2.Zero;
 
-            if (currentKeyState.IsKeyDown(_keyUp))
+            if (currentKeyState.IsKeyDown(keyUp))
             {
                 direction.Y -= 1;
             }
 
-            if (currentKeyState.IsKeyDown(_keyDown))
+            if (currentKeyState.IsKeyDown(keyDown))
             {
                 direction.Y += 1;
             }
 
-            if (currentKeyState.IsKeyDown(_keyLeft))
+            if (currentKeyState.IsKeyDown(keyLeft))
             {
                 direction.X -= 1;
             }
 
-            if (currentKeyState.IsKeyDown(_keyRight))
+            if (currentKeyState.IsKeyDown(keyRight))
             {
                 direction.X += 1;
             }
@@ -58,7 +58,7 @@ namespace MonoGameLibrary.Control
         public bool IsQuitGame()
         {
             
-                return currentKeyState.IsKeyDown(_keyQuit);
+                return currentKeyState.IsKeyDown(keyQuit);
             
         }
         //following methods are pause and resume game methods,they are same
@@ -76,7 +76,7 @@ namespace MonoGameLibrary.Control
         public bool IsPausePressed()
         {
 
-            return currentKeyState.IsKeyDown(_keyPause)&&!previousKeyState.IsKeyDown(_keyPause);
+            return currentKeyState.IsKeyDown(keyPause)&&!previousKeyState.IsKeyDown(keyPause);
             
         }
 
