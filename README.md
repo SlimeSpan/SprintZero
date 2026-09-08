@@ -1,30 +1,27 @@
-# SprintZero
-Basic 2D movement for Link (from *The Legend of Zelda*) developed using the MonoGame framework.
+## GitHub Link
+[SlimeSpan/BasicLinkActions](https://github.com/SlimeSpan/BasicLinkActions)
 
-## Github Link
-https://github.com/SlimeSpan/BasicLinkActions
+## Game Functions
 
-# Game Funcion
+### Movements
+* **Up**: Keyboard `W`
+* **Down**: Keyboard `S`
+* **Left**: Keyboard `A`
+* **Right**: Keyboard `D`
 
-## Movements
-Up: Keyboard/W
-Down: Keyboard/S
-Left: Keyboard/A
-Right:Keyboard/D
+### Actions
+* **Attack**: Keyboard `K` or `Mouse Left Click`
 
-## Action
-Attack:Keyboard/K  OR Mouse/Left
+### Game UI
+* **Exit**: Keyboard `Esc`
 
-## GameUi
-Exit:Keyboard/Esc
+## Credits
 
-# Credits
+### Source
+* [Sprite Source](https://www.spriters-resource.com/nes/legendofzelda/asset/8366/)
 
-## Source
-[Sprite Source](https://www.spriters-resource.com/nes/legendofzelda/asset/8366/)
-
-## AI
-This project utilized AI to
-1.Naming checks for variables, classes, and interfaces
-2.Find bugs / Find errors.
-3.Code Review
+### AI Assistance
+This project utilized AI to:
+1. Perform naming checks for variables, classes, and interfaces.
+2. Find bugs and errors.
+3. Conduct code reviews.
